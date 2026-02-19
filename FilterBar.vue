@@ -26,7 +26,7 @@
       </div>
 
       <!-- Filter Buttons -->
-      <div class="flex gap-2">
+      <div class="flex gap-2 flex-wrap">
         <button
           @click="setFilter('all')"
           :class="['px-4 py-2 rounded-lg text-sm font-medium transition-colors',
@@ -47,6 +47,20 @@
                    activeFilter === 'laptops' ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200']"
         >
           Laptops
+        </button>
+        <button
+          @click="setFilter('clothing')"
+          :class="['px-4 py-2 rounded-lg text-sm font-medium transition-colors',
+                   activeFilter === 'clothing' ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200']"
+        >
+          Clothing
+        </button>
+        <button
+          @click="setFilter('home')"
+          :class="['px-4 py-2 rounded-lg text-sm font-medium transition-colors',
+                   activeFilter === 'home' ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200']"
+        >
+          Home & Kitchen
         </button>
       </div>
     </div>

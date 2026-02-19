@@ -1,13 +1,49 @@
 <template>
   <div>
     <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white py-20">
-      <div class="container mx-auto px-4 text-center">
+    <section class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white py-20 relative overflow-hidden">
+      <!-- Background Pattern -->
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-10 left-10 w-20 h-20 bg-white rounded-full"></div>
+        <div class="absolute top-32 right-20 w-16 h-16 bg-white rounded-full"></div>
+        <div class="absolute bottom-20 left-1/4 w-12 h-12 bg-white rounded-full"></div>
+        <div class="absolute bottom-32 right-1/3 w-24 h-24 bg-white rounded-full"></div>
+      </div>
+
+      <div class="container mx-auto px-4 text-center relative z-10">
         <h1 class="text-5xl font-bold mb-4">Welcome to Cool Shopping</h1>
-        <p class="text-xl mb-8">Discover amazing products at unbeatable prices</p>
-        <button class="bg-white text-indigo-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-          Shop Now
-        </button>
+        <p class="text-xl mb-8 max-w-2xl mx-auto">
+          Discover amazing products at unbeatable prices. Shop from our curated collection
+          of electronics, fashion, home goods, and more with fast shipping and excellent service.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+          <button class="bg-white text-indigo-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+            Shop Now
+          </button>
+          <button class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-indigo-600 transition-colors">
+            View Categories
+          </button>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+          <div class="text-center">
+            <div class="text-3xl font-bold mb-2">24+</div>
+            <div class="text-indigo-200">Products</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-bold mb-2">5</div>
+            <div class="text-indigo-200">Categories</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-bold mb-2">4.8★</div>
+            <div class="text-indigo-200">Avg Rating</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-bold mb-2">24/7</div>
+            <div class="text-indigo-200">Support</div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -17,6 +53,59 @@
       <FilterBar ref="filterBarRef" />
 
       <ProductGrid :products="filteredProducts" />
+
+      <!-- Featured Categories -->
+      <section class="mt-16 bg-white py-16">
+        <div class="container mx-auto px-4">
+          <h2 class="text-3xl font-bold text-center mb-12">Shop by Category</h2>
+          <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
+            <div class="text-center group cursor-pointer">
+              <div class="bg-gradient-to-br from-blue-100 to-blue-200 p-6 rounded-lg mb-4 group-hover:shadow-lg transition-shadow">
+                <svg class="h-12 w-12 mx-auto text-blue-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <h3 class="font-semibold text-gray-800">Electronics</h3>
+            </div>
+
+            <div class="text-center group cursor-pointer">
+              <div class="bg-gradient-to-br from-green-100 to-green-200 p-6 rounded-lg mb-4 group-hover:shadow-lg transition-shadow">
+                <svg class="h-12 w-12 mx-auto text-green-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <h3 class="font-semibold text-gray-800">Laptops</h3>
+            </div>
+
+            <div class="text-center group cursor-pointer">
+              <div class="bg-gradient-to-br from-purple-100 to-purple-200 p-6 rounded-lg mb-4 group-hover:shadow-lg transition-shadow">
+                <svg class="h-12 w-12 mx-auto text-purple-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                </svg>
+              </div>
+              <h3 class="font-semibold text-gray-800">Fashion</h3>
+            </div>
+
+            <div class="text-center group cursor-pointer">
+              <div class="bg-gradient-to-br from-orange-100 to-orange-200 p-6 rounded-lg mb-4 group-hover:shadow-lg transition-shadow">
+                <svg class="h-12 w-12 mx-auto text-orange-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                </svg>
+              </div>
+              <h3 class="font-semibold text-gray-800">Home</h3>
+            </div>
+
+            <div class="text-center group cursor-pointer">
+              <div class="bg-gradient-to-br from-pink-100 to-pink-200 p-6 rounded-lg mb-4 group-hover:shadow-lg transition-shadow">
+                <svg class="h-12 w-12 mx-auto text-pink-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                </svg>
+              </div>
+              <h3 class="font-semibold text-gray-800">Beauty</h3>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
   </div>
 </template>

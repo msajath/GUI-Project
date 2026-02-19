@@ -14,19 +14,20 @@
     <main class="container mx-auto px-4 py-8">
       <h1 class="text-3xl font-bold mb-8">Products</h1>
 
-      <FilterBar />
+      <FilterBar ref="filterBarRef" />
 
-      <ProductGrid :products="products" />
+      <ProductGrid :products="filteredProducts" />
     </main>
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref, computed } from 'vue'
 import FilterBar from './FilterBar.vue'
 import ProductGrid from './ProductGrid.vue'
 import type { Product } from './Product'
 
-const products: Product[] = [
+const products = ref<Product[]>([
   {
     id: 1,
     title: 'iPhone 14 Pro',
@@ -59,5 +60,29 @@ const products: Product[] = [
     rating: 4.9,
     thumbnail: 'https://dummyjson.com/image/i/products/4/thumbnail.jpg'
   },
-]
+])
+
+// Get filter bar reference
+const filterBarRef = ref()
+
+// Computed filtered products
+const filteredProducts = computed(() => {
+  if (!filterBarRef.value) return products.value
+
+  const { searchQuery, activeFilter } = filterBarRef.value
+
+  return products.value.filter(product => {
+    // Search filter
+    const matchesSearch = !searchQuery.value ||
+      product.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+      product.description.toLowerCase().includes(searchQuery.value.toLowerCase())
+
+    // Category filter
+    const matchesCategory = activeFilter.value === 'all' ||
+      (activeFilter.value === 'electronics' && (product.title.includes('iPhone') || product.title.includes('Samsung') || product.title.includes('iPad'))) ||
+      (activeFilter.value === 'laptops' && product.title.includes('MacBook'))
+
+    return matchesSearch && matchesCategory
+  })
+})
 </script>

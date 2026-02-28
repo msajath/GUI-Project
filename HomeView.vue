@@ -11,7 +11,7 @@
       </div>
 
       <div class="container mx-auto px-4 text-center relative z-10">
-        <h1 class="text-5xl font-bold mb-4">Welcome to Cool Shopping</h1>
+        <h1 class="text-5xl font-bold mb-4">Welcome to ShopSphere</h1>
         <p class="text-xl mb-8 max-w-2xl mx-auto">
           Discover amazing products at unbeatable prices. Shop from our curated collection
           of electronics, fashion, home goods, and more with fast shipping and excellent service.
@@ -32,7 +32,7 @@
             <div class="text-indigo-200">Products</div>
           </div>
           <div class="text-center">
-            <div class="text-3xl font-bold mb-2">5</div>
+            <div class="text-3xl font-bold mb-2">10</div>
             <div class="text-indigo-200">Categories</div>
           </div>
           <div class="text-center">
@@ -58,7 +58,7 @@
       <section class="mt-16 bg-white py-16">
         <div class="container mx-auto px-4">
           <h2 class="text-3xl font-bold text-center mb-12">Shop by Category</h2>
-          <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
+          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
             <div class="text-center group cursor-pointer">
               <div class="bg-gradient-to-br from-blue-100 to-blue-200 p-6 rounded-lg mb-4 group-hover:shadow-lg transition-shadow">
                 <svg class="h-12 w-12 mx-auto text-blue-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -102,6 +102,51 @@
                 </svg>
               </div>
               <h3 class="font-semibold text-gray-800">Beauty</h3>
+            </div>
+
+            <div class="text-center group cursor-pointer">
+              <div class="bg-gradient-to-br from-red-100 to-red-200 p-6 rounded-lg mb-4 group-hover:shadow-lg transition-shadow">
+                <svg class="h-12 w-12 mx-auto text-red-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+              </div>
+              <h3 class="font-semibold text-gray-800">Sports</h3>
+            </div>
+
+            <div class="text-center group cursor-pointer">
+              <div class="bg-gradient-to-br from-yellow-100 to-yellow-200 p-6 rounded-lg mb-4 group-hover:shadow-lg transition-shadow">
+                <svg class="h-12 w-12 mx-auto text-yellow-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C6.5 6.253 2 10.998 2 17s4.5 10.747 10 10.747c5.5 0 10-4.998 10-10.747S17.5 6.253 12 6.253z"></path>
+                </svg>
+              </div>
+              <h3 class="font-semibold text-gray-800">Books</h3>
+            </div>
+
+            <div class="text-center group cursor-pointer">
+              <div class="bg-gradient-to-br from-indigo-100 to-indigo-200 p-6 rounded-lg mb-4 group-hover:shadow-lg transition-shadow">
+                <svg class="h-12 w-12 mx-auto text-indigo-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <h3 class="font-semibold text-gray-800">Toys</h3>
+            </div>
+
+            <div class="text-center group cursor-pointer">
+              <div class="bg-gradient-to-br from-teal-100 to-teal-200 p-6 rounded-lg mb-4 group-hover:shadow-lg transition-shadow">
+                <svg class="h-12 w-12 mx-auto text-teal-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3v-9"></path>
+                </svg>
+              </div>
+              <h3 class="font-semibold text-gray-800">Fitness</h3>
+            </div>
+
+            <div class="text-center group cursor-pointer">
+              <div class="bg-gradient-to-br from-cyan-100 to-cyan-200 p-6 rounded-lg mb-4 group-hover:shadow-lg transition-shadow">
+                <svg class="h-12 w-12 mx-auto text-cyan-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                </svg>
+              </div>
+              <h3 class="font-semibold text-gray-800">Accessories</h3>
             </div>
           </div>
         </div>

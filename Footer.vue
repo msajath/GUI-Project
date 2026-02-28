@@ -5,8 +5,8 @@
         <!-- Company Info -->
         <div class="col-span-1 md:col-span-2">
           <div class="flex items-center mb-4">
-            <img src="/logo.svg" alt="Cool Shopping Logo" class="h-8 w-8 mr-2">
-            <span class="text-xl font-bold">Cool Shopping</span>
+            <img src="/logo.svg" alt="ShopSphere Logo" class="h-8 w-8 mr-2">
+            <span class="text-xl font-bold">ShopSphere</span>
           </div>
           <p class="text-gray-300 mb-4">
             Your ultimate destination for amazing products at unbeatable prices.
@@ -59,7 +59,7 @@
       <!-- Bottom Bar -->
       <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
         <p class="text-gray-400 text-sm">
-          © 2026 Cool Shopping. All rights reserved.
+          © 2026 ShopSphere. All rights reserved.
         </p>
         <div class="flex space-x-6 mt-4 md:mt-0">
           <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Privacy Policy</a>

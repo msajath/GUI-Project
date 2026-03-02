@@ -104,8 +104,16 @@
             <button class="btn-primary w-full py-4 text-lg">
               🛒 Add to Cart
             </button>
-            <button class="w-full py-4 border-2 border-indigo-600 text-indigo-600 text-indigo-400 rounded-lg font-bold hover:bg-indigo-50 hover:bg-gray-700 transition-colors duration-200">
-              ♡ Add to Wishlist
+            <button 
+              @click="toggleSave"
+              :class="[
+                'w-full py-4 border-2 rounded-lg font-bold transition-colors duration-200',
+                isSaved
+                  ? 'bg-red-600 border-red-600 text-white'
+                  : 'border-indigo-600 text-indigo-600 text-indigo-400 hover:bg-indigo-50 hover:bg-gray-700'
+              ]"
+            >
+              {{ isSaved ? '❤️ Saved to Wishlist' : '♡ Add to Wishlist' }}
             </button>
             <button class="w-full py-3 border-2 border-gray-300 border-gray-600 text-gray-700 text-gray-300 rounded-lg font-semibold hover:bg-gray-100 hover:bg-gray-700 transition-colors duration-200">
               💬 Ask a Question
@@ -148,7 +156,10 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted } from 'vue'
 import type { Product } from './Product'
+
+const isSaved = ref(false)
 
 const product: Product = {
   id: 1,
@@ -158,4 +169,29 @@ const product: Product = {
   rating: 4.8,
   thumbnail: 'https://dummyjson.com/image/i/products/1/thumbnail.jpg'
 }
+
+const getSavedProducts = () => {
+  const saved = localStorage.getItem('savedProducts')
+  return saved ? JSON.parse(saved) : []
+}
+
+const toggleSave = () => {
+  let savedProducts = getSavedProducts()
+  
+  if (isSaved.value) {
+    // Remove from saved
+    savedProducts = savedProducts.filter((id: number) => id !== product.id)
+  } else {
+    // Add to saved
+    savedProducts.push(product.id)
+  }
+  
+  localStorage.setItem('savedProducts', JSON.stringify(savedProducts))
+  isSaved.value = !isSaved.value
+}
+
+onMounted(() => {
+  const savedProducts = getSavedProducts()
+  isSaved.value = savedProducts.includes(product.id)
+})
 </script>

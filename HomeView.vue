@@ -160,6 +160,7 @@ import { ref, computed } from 'vue'
 import FilterBar from './FilterBar.vue'
 import ProductGrid from './ProductGrid.vue'
 import type { Product } from './Product'
+import { getProductImage } from './imageMapping'
 
 const products = ref<Product[]>([
   // Electronics
@@ -169,7 +170,7 @@ const products = ref<Product[]>([
     description: 'Latest Apple phone with advanced camera system',
     price: 999,
     rating: 4.8,
-    thumbnail: 'https://dummyjson.com/image/i/products/1/thumbnail.jpg'
+    thumbnail: getProductImage('iPhone 14 Pro')
   },
   {
     id: 2,
@@ -177,7 +178,7 @@ const products = ref<Product[]>([
     description: 'Premium Android device with stunning display',
     price: 899,
     rating: 4.7,
-    thumbnail: 'https://dummyjson.com/image/i/products/2/thumbnail.jpg'
+    thumbnail: getProductImage('Samsung Galaxy S23')
   },
   {
     id: 3,
@@ -185,7 +186,7 @@ const products = ref<Product[]>([
     description: 'Powerful tablet device for work and play',
     price: 599,
     rating: 4.6,
-    thumbnail: 'https://dummyjson.com/image/i/products/3/thumbnail.jpg'
+    thumbnail: getProductImage('iPad Air')
   },
   {
     id: 4,
@@ -193,7 +194,7 @@ const products = ref<Product[]>([
     description: 'Professional laptop for creators',
     price: 1999,
     rating: 4.9,
-    thumbnail: 'https://dummyjson.com/image/i/products/4/thumbnail.jpg'
+    thumbnail: getProductImage('MacBook Pro')
   },
   {
     id: 5,
@@ -201,7 +202,7 @@ const products = ref<Product[]>([
     description: 'Premium wireless noise-canceling headphones',
     price: 349,
     rating: 4.7,
-    thumbnail: 'https://dummyjson.com/image/i/products/5/thumbnail.jpg'
+    thumbnail: getProductImage('Sony WH-1000XM4')
   },
   {
     id: 6,
@@ -209,7 +210,7 @@ const products = ref<Product[]>([
     description: 'Ultra-portable laptop with stunning display',
     price: 1299,
     rating: 4.6,
-    thumbnail: 'https://dummyjson.com/image/i/products/6/thumbnail.jpg'
+    thumbnail: getProductImage('Dell XPS 13')
   },
   {
     id: 7,
@@ -217,7 +218,7 @@ const products = ref<Product[]>([
     description: 'Advanced smartwatch with health features',
     price: 399,
     rating: 4.5,
-    thumbnail: 'https://dummyjson.com/image/i/products/7/thumbnail.jpg'
+    thumbnail: getProductImage('Apple Watch Series 8')
   },
   {
     id: 8,
@@ -225,7 +226,7 @@ const products = ref<Product[]>([
     description: 'Portable gaming console with vibrant display',
     price: 349,
     rating: 4.8,
-    thumbnail: 'https://dummyjson.com/image/i/products/8/thumbnail.jpg'
+    thumbnail: getProductImage('Nintendo Switch OLED')
   },
 
   // Laptops
@@ -235,7 +236,7 @@ const products = ref<Product[]>([
     description: 'Gaming laptop with powerful performance',
     price: 1499,
     rating: 4.6,
-    thumbnail: 'https://dummyjson.com/image/i/products/9/thumbnail.jpg'
+    thumbnail: getProductImage('ASUS ROG Strix G15')
   },
   {
     id: 10,
@@ -243,7 +244,7 @@ const products = ref<Product[]>([
     description: '2-in-1 laptop with premium build quality',
     price: 1399,
     rating: 4.5,
-    thumbnail: 'https://dummyjson.com/image/i/products/10/thumbnail.jpg'
+    thumbnail: getProductImage('HP Spectre x360')
   },
   {
     id: 11,
@@ -251,7 +252,7 @@ const products = ref<Product[]>([
     description: 'Business laptop with legendary reliability',
     price: 1599,
     rating: 4.7,
-    thumbnail: 'https://dummyjson.com/image/i/products/11/thumbnail.jpg'
+    thumbnail: getProductImage('Lenovo ThinkPad X1 Carbon')
   },
   {
     id: 12,
@@ -259,7 +260,7 @@ const products = ref<Product[]>([
     description: 'Sleek laptop with all-day battery life',
     price: 1199,
     rating: 4.4,
-    thumbnail: 'https://dummyjson.com/image/i/products/12/thumbnail.jpg'
+    thumbnail: getProductImage('Microsoft Surface Laptop 4')
   },
 
   // Clothing & Fashion
@@ -269,7 +270,7 @@ const products = ref<Product[]>([
     description: 'Comfortable running shoes with iconic style',
     price: 150,
     rating: 4.6,
-    thumbnail: 'https://dummyjson.com/image/i/products/13/thumbnail.jpg'
+    thumbnail: getProductImage('Nike Air Max 270')
   },
   {
     id: 14,
@@ -277,7 +278,7 @@ const products = ref<Product[]>([
     description: 'Classic straight-fit jeans',
     price: 89,
     rating: 4.5,
-    thumbnail: 'https://dummyjson.com/image/i/products/14/thumbnail.jpg'
+    thumbnail: getProductImage('Levi\'s 501 Original Jeans')
   },
   {
     id: 15,
@@ -285,7 +286,7 @@ const products = ref<Product[]>([
     description: 'High-performance running shoes',
     price: 180,
     rating: 4.7,
-    thumbnail: 'https://dummyjson.com/image/i/products/15/thumbnail.jpg'
+    thumbnail: getProductImage('Adidas Ultraboost 22')
   },
   {
     id: 16,
@@ -293,7 +294,7 @@ const products = ref<Product[]>([
     description: 'Soft and comfortable basic tee',
     price: 12,
     rating: 4.2,
-    thumbnail: 'https://dummyjson.com/image/i/products/16/thumbnail.jpg'
+    thumbnail: getProductImage('H&M Cotton T-Shirt')
   },
 
   // Home & Kitchen
@@ -303,7 +304,7 @@ const products = ref<Product[]>([
     description: 'Professional-grade mixer for baking enthusiasts',
     price: 379,
     rating: 4.8,
-    thumbnail: 'https://dummyjson.com/image/i/products/17/thumbnail.jpg'
+    thumbnail: getProductImage('KitchenAid Stand Mixer')
   },
   {
     id: 18,
@@ -311,7 +312,7 @@ const products = ref<Product[]>([
     description: 'Powerful cordless vacuum cleaner',
     price: 499,
     rating: 4.6,
-    thumbnail: 'https://dummyjson.com/image/i/products/18/thumbnail.jpg'
+    thumbnail: getProductImage('Dyson V8 Absolute')
   },
   {
     id: 19,
@@ -319,7 +320,7 @@ const products = ref<Product[]>([
     description: 'Multi-cooker for fast and easy cooking',
     price: 89,
     rating: 4.7,
-    thumbnail: 'https://dummyjson.com/image/i/products/19/thumbnail.jpg'
+    thumbnail: getProductImage('Instant Pot Duo 7-in-1')
   },
   {
     id: 20,
@@ -327,7 +328,7 @@ const products = ref<Product[]>([
     description: 'Premium espresso maker with milk frother',
     price: 199,
     rating: 4.5,
-    thumbnail: 'https://dummyjson.com/image/i/products/20/thumbnail.jpg'
+    thumbnail: getProductImage('Nespresso Coffee Machine')
   },
 
   // Beauty & Personal Care
@@ -337,7 +338,7 @@ const products = ref<Product[]>([
     description: 'Multi-styling tool for hair care',
     price: 599,
     rating: 4.4,
-    thumbnail: 'https://dummyjson.com/image/i/products/21/thumbnail.jpg'
+    thumbnail: getProductImage('Dyson Airwrap')
   },
   {
     id: 22,
@@ -345,7 +346,7 @@ const products = ref<Product[]>([
     description: 'Smart robotic vacuum for automated cleaning',
     price: 299,
     rating: 4.3,
-    thumbnail: 'https://dummyjson.com/image/i/products/22/thumbnail.jpg'
+    thumbnail: getProductImage('iRobot Roomba')
   },
   {
     id: 23,
@@ -353,7 +354,7 @@ const products = ref<Product[]>([
     description: 'Electric toothbrush for superior cleaning',
     price: 89,
     rating: 4.6,
-    thumbnail: 'https://dummyjson.com/image/i/products/23/thumbnail.jpg'
+    thumbnail: getProductImage('Philips Sonicare Toothbrush')
   },
   {
     id: 24,
@@ -361,7 +362,7 @@ const products = ref<Product[]>([
     description: 'High-capacity portable charger',
     price: 49,
     rating: 4.5,
-    thumbnail: 'https://dummyjson.com/image/i/products/24/thumbnail.jpg'
+    thumbnail: getProductImage('Anker PowerCore 20000')
   }
 ])
 

@@ -6,8 +6,8 @@
 export const getProductImage = (productTitle: string): string => {
   const imageMap: Record<string, string> = {
     // Electronics
-    'iPhone 14 Pro': 'https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-14-pro-max-1.jpg',
-    'Samsung Galaxy S23': 'https://images.pexels.com/photos/699122/pexels-photo-699122.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
+    'iPhone 14 Pro': 'https://phonesdata.com/files/models/Apple-iPhone-14-Pro-Max-656.jpg',
+    'Samsung Galaxy S23': 'https://a-static.mlcdn.com.br/1500x1500/smartphone-samsung-galaxy-s23-256gb-preto-5g-8gb-ram-61-cam-tripla-selfie-12mp/magazineluiza/232854100/e9fd12e9a66f2797bce34c5169369937.jpg',
     'iPad Air': 'https://images.pexels.com/photos/1334597/pexels-photo-1334597.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
     'Apple Watch Series 8': 'https://images.pexels.com/photos/3394650/pexels-photo-3394650.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
     'Nintendo Switch OLED': 'https://images.pexels.com/photos/3408617/pexels-photo-3408617.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',

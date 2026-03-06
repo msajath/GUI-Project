@@ -2,7 +2,7 @@
   <div class="min-h-screen bg-gradient-to-br from-indigo-600 via-purple-500 to-pink-500 flex items-center justify-center p-4 relative overflow-hidden">
     <!-- Animated background elements -->
     <div class="absolute top-20 left-20 w-72 h-72 bg-white/10 rounded-full blur-3xl animate-float"></div>
-    <div class="absolute bottom-20 right-20 w-80 h-80 bg-white/10 rounded-full blur-3xl animate-float" style="animation-delay: 2s;"></div>
+    <div class="absolute bottom-20 right-20 w-80 h-80 bg-white/10 rounded-full blur-3xl animate-float" style="animation-delay: 1s;"></div>
     
     <div class="w-full max-w-md relative z-10">
       <div class="bg-white/95 backdrop-blur-lg p-8 rounded-2xl shadow-2xl transform transition-all duration-500 hover:shadow-3xl hover:scale-105">

@@ -81,10 +81,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+
+const emit = defineEmits<{
+  (e: 'update:search', value: string): void
+  (e: 'update:filter', value: string): void
+}>()
 
 const searchQuery = ref('')
 const activeFilter = ref('all')
+
+watch(searchQuery, (val) => {
+  emit('update:search', val)
+})
 
 const clearSearch = () => {
   searchQuery.value = ''
@@ -92,11 +101,6 @@ const clearSearch = () => {
 
 const setFilter = (filter: string) => {
   activeFilter.value = filter
+  emit('update:filter', filter)
 }
-
-// Expose reactive values for parent component
-defineExpose({
-  searchQuery,
-  activeFilter
-})
 </script>

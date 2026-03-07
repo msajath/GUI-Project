@@ -50,7 +50,7 @@
     <main class="container mx-auto px-4 py-8">
       <h1 class="text-3xl font-bold mb-8">Products</h1>
 
-      <FilterBar ref="filterBarRef" />
+      <FilterBar @update:search="onSearchUpdate" @update:filter="onFilterUpdate" />
 
       <ProductGrid :products="filteredProducts" />
 
@@ -366,15 +366,18 @@ const products = ref<Product[]>([
   }
 ])
 
-// Get filter bar reference
-const filterBarRef = ref()
+const searchQuery = ref('')
+const activeFilter = ref('all')
+
+const onSearchUpdate = (val: string) => {
+  searchQuery.value = val
+}
+const onFilterUpdate = (val: string) => {
+  activeFilter.value = val
+}
 
 // Computed filtered products
 const filteredProducts = computed(() => {
-  if (!filterBarRef.value) return products.value
-
-  const { searchQuery, activeFilter } = filterBarRef.value
-
   return products.value.filter(product => {
     // Search filter
     const matchesSearch = !searchQuery.value ||
@@ -387,7 +390,7 @@ const filteredProducts = computed(() => {
     if (!matchesCategory) {
       switch (activeFilter.value) {
         case 'electronics':
-          matchesCategory = [1, 2, 3, 5, 7, 8, 21, 22, 23, 24].includes(product.id)
+          matchesCategory = [1, 2, 3, 5, 7, 8].includes(product.id)
           break
         case 'laptops':
           matchesCategory = [4, 6, 9, 10, 11, 12].includes(product.id)

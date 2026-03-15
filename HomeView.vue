@@ -17,10 +17,18 @@
           of electronics, fashion, home goods, and more with fast shipping and excellent service.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-          <button class="bg-white text-indigo-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+          <button
+            type="button"
+            @click="scrollToSection(productsSection)"
+            class="bg-white text-indigo-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+          >
             Shop Now
           </button>
-          <button class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-indigo-600 transition-colors">
+          <button
+            type="button"
+            @click="scrollToSection(categoriesSection)"
+            class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-indigo-600 transition-colors"
+          >
             View Categories
           </button>
         </div>
@@ -28,15 +36,15 @@
         <!-- Stats -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
           <div class="text-center">
-            <div class="text-3xl font-bold mb-2">24+</div>
+            <div class="text-3xl font-bold mb-2">{{ products.length }}</div>
             <div class="text-indigo-200">Products</div>
           </div>
           <div class="text-center">
-            <div class="text-3xl font-bold mb-2">10</div>
+            <div class="text-3xl font-bold mb-2">{{ categories.length }}</div>
             <div class="text-indigo-200">Categories</div>
           </div>
           <div class="text-center">
-            <div class="text-3xl font-bold mb-2">4.8★</div>
+            <div class="text-3xl font-bold mb-2">{{ averageRating }}★</div>
             <div class="text-indigo-200">Avg Rating</div>
           </div>
           <div class="text-center">
@@ -47,107 +55,49 @@
       </div>
     </section>
 
-    <main class="container mx-auto px-4 py-8">
+    <main ref="productsSection" class="container mx-auto px-4 py-8 scroll-mt-24">
       <h1 class="text-3xl font-bold mb-8">Products</h1>
 
-      <FilterBar @update:search="onSearchUpdate" @update:filter="onFilterUpdate" />
+      <FilterBar
+        :categories="categories"
+        :active-filter="activeFilter"
+        @update:search="onSearchUpdate"
+        @update:filter="onFilterUpdate"
+      />
 
       <ProductGrid :products="filteredProducts" />
 
       <!-- Featured Categories -->
-      <section class="mt-16 bg-white py-16">
+      <section ref="categoriesSection" class="mt-16 bg-white py-16 scroll-mt-24">
         <div class="container mx-auto px-4">
           <h2 class="text-3xl font-bold text-center mb-12">Shop by Category</h2>
-          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            <div class="text-center group cursor-pointer">
-              <div class="bg-gradient-to-br from-blue-100 to-blue-200 p-6 rounded-lg mb-4 group-hover:shadow-lg transition-shadow">
-                <svg class="h-12 w-12 mx-auto text-blue-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <button
+              v-for="category in categories"
+              :key="category.id"
+              type="button"
+              :aria-pressed="activeFilter === category.id"
+              @click="selectCategory(category.id)"
+              :class="[
+                'group rounded-2xl border p-6 text-left transition-all',
+                activeFilter === category.id
+                  ? 'border-indigo-500 ring-2 ring-indigo-100 shadow-lg'
+                  : 'border-gray-200 hover:-translate-y-1 hover:shadow-lg'
+              ]"
+            >
+              <div :class="['inline-flex rounded-2xl p-4 mb-4 transition-transform group-hover:scale-105', category.cardClass]">
+                <svg :class="['h-10 w-10', category.iconClass]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" :d="category.iconPath"></path>
                 </svg>
               </div>
-              <h3 class="font-semibold text-gray-800">Electronics</h3>
-            </div>
-
-            <div class="text-center group cursor-pointer">
-              <div class="bg-gradient-to-br from-green-100 to-green-200 p-6 rounded-lg mb-4 group-hover:shadow-lg transition-shadow">
-                <svg class="h-12 w-12 mx-auto text-green-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                </svg>
+              <div class="flex items-start justify-between gap-3 mb-2">
+                <h3 class="font-semibold text-gray-800">{{ category.label }}</h3>
+                <span class="rounded-full bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-600">
+                  {{ getCategoryCount(category.id) }} items
+                </span>
               </div>
-              <h3 class="font-semibold text-gray-800">Laptops</h3>
-            </div>
-
-            <div class="text-center group cursor-pointer">
-              <div class="bg-gradient-to-br from-purple-100 to-purple-200 p-6 rounded-lg mb-4 group-hover:shadow-lg transition-shadow">
-                <svg class="h-12 w-12 mx-auto text-purple-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
-                </svg>
-              </div>
-              <h3 class="font-semibold text-gray-800">Fashion</h3>
-            </div>
-
-            <div class="text-center group cursor-pointer">
-              <div class="bg-gradient-to-br from-orange-100 to-orange-200 p-6 rounded-lg mb-4 group-hover:shadow-lg transition-shadow">
-                <svg class="h-12 w-12 mx-auto text-orange-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-                </svg>
-              </div>
-              <h3 class="font-semibold text-gray-800">Home</h3>
-            </div>
-
-            <div class="text-center group cursor-pointer">
-              <div class="bg-gradient-to-br from-pink-100 to-pink-200 p-6 rounded-lg mb-4 group-hover:shadow-lg transition-shadow">
-                <svg class="h-12 w-12 mx-auto text-pink-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                </svg>
-              </div>
-              <h3 class="font-semibold text-gray-800">Beauty</h3>
-            </div>
-
-            <div class="text-center group cursor-pointer">
-              <div class="bg-gradient-to-br from-red-100 to-red-200 p-6 rounded-lg mb-4 group-hover:shadow-lg transition-shadow">
-                <svg class="h-12 w-12 mx-auto text-red-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                </svg>
-              </div>
-              <h3 class="font-semibold text-gray-800">Sports</h3>
-            </div>
-
-            <div class="text-center group cursor-pointer">
-              <div class="bg-gradient-to-br from-yellow-100 to-yellow-200 p-6 rounded-lg mb-4 group-hover:shadow-lg transition-shadow">
-                <svg class="h-12 w-12 mx-auto text-yellow-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C6.5 6.253 2 10.998 2 17s4.5 10.747 10 10.747c5.5 0 10-4.998 10-10.747S17.5 6.253 12 6.253z"></path>
-                </svg>
-              </div>
-              <h3 class="font-semibold text-gray-800">Books</h3>
-            </div>
-
-            <div class="text-center group cursor-pointer">
-              <div class="bg-gradient-to-br from-indigo-100 to-indigo-200 p-6 rounded-lg mb-4 group-hover:shadow-lg transition-shadow">
-                <svg class="h-12 w-12 mx-auto text-indigo-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-              </div>
-              <h3 class="font-semibold text-gray-800">Toys</h3>
-            </div>
-
-            <div class="text-center group cursor-pointer">
-              <div class="bg-gradient-to-br from-teal-100 to-teal-200 p-6 rounded-lg mb-4 group-hover:shadow-lg transition-shadow">
-                <svg class="h-12 w-12 mx-auto text-teal-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3v-9"></path>
-                </svg>
-              </div>
-              <h3 class="font-semibold text-gray-800">Fitness</h3>
-            </div>
-
-            <div class="text-center group cursor-pointer">
-              <div class="bg-gradient-to-br from-cyan-100 to-cyan-200 p-6 rounded-lg mb-4 group-hover:shadow-lg transition-shadow">
-                <svg class="h-12 w-12 mx-auto text-cyan-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                </svg>
-              </div>
-              <h3 class="font-semibold text-gray-800">Accessories</h3>
-            </div>
+              <p class="text-sm text-gray-500">{{ category.description }}</p>
+            </button>
           </div>
         </div>
       </section>
@@ -156,13 +106,94 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { computed, ref } from 'vue'
 import FilterBar from './FilterBar.vue'
 import ProductGrid from './ProductGrid.vue'
 import type { Product } from './Product'
 import { getProductImage } from './imageMapping'
 
-const products = ref<Product[]>([
+type CategoryId = 'electronics' | 'laptops' | 'fashion' | 'home' | 'beauty' | 'audio' | 'accessories'
+
+interface Category {
+  id: CategoryId
+  label: string
+  description: string
+  cardClass: string
+  iconClass: string
+  iconPath: string
+}
+
+type CatalogProduct = Product & {
+  category: CategoryId
+}
+
+const categories: Category[] = [
+  {
+    id: 'electronics',
+    label: 'Electronics',
+    description: 'Phones, tablets, and entertainment devices.',
+    cardClass: 'bg-gradient-to-br from-blue-100 to-blue-200',
+    iconClass: 'text-blue-600',
+    iconPath: 'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'
+  },
+  {
+    id: 'laptops',
+    label: 'Laptops',
+    description: 'Portable power for work, gaming, and travel.',
+    cardClass: 'bg-gradient-to-br from-green-100 to-green-200',
+    iconClass: 'text-green-600',
+    iconPath: 'M4 6h16v10H4zM2 18h20'
+  },
+  {
+    id: 'fashion',
+    label: 'Fashion',
+    description: 'Daily wear essentials with clean, modern style.',
+    cardClass: 'bg-gradient-to-br from-purple-100 to-purple-200',
+    iconClass: 'text-purple-600',
+    iconPath: 'M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z'
+  },
+  {
+    id: 'home',
+    label: 'Home',
+    description: 'Kitchen tools and smart upgrades for every room.',
+    cardClass: 'bg-gradient-to-br from-orange-100 to-orange-200',
+    iconClass: 'text-orange-600',
+    iconPath: 'M3 12l9-9 9 9M5 10v10h14V10'
+  },
+  {
+    id: 'beauty',
+    label: 'Beauty',
+    description: 'Personal care and grooming picks that last.',
+    cardClass: 'bg-gradient-to-br from-pink-100 to-pink-200',
+    iconClass: 'text-pink-600',
+    iconPath: 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z'
+  },
+  {
+    id: 'audio',
+    label: 'Audio',
+    description: 'Immersive sound gear for calls, music, and focus.',
+    cardClass: 'bg-gradient-to-br from-red-100 to-red-200',
+    iconClass: 'text-red-600',
+    iconPath: 'M9 18V5l12-2v13M9 18a3 3 0 11-6 0 3 3 0 016 0zm12-2a3 3 0 11-6 0 3 3 0 016 0z'
+  },
+  {
+    id: 'accessories',
+    label: 'Accessories',
+    description: 'Wearables and travel-ready add-ons for daily use.',
+    cardClass: 'bg-gradient-to-br from-cyan-100 to-cyan-200',
+    iconClass: 'text-cyan-600',
+    iconPath: 'M12 6V4m0 16v-2m8-6h-2M6 12H4m11.314 5.314-1.414-1.414M8.1 8.1 6.686 6.686m8.628 0L13.9 8.1M8.1 15.9l-1.414 1.414M12 8a4 4 0 100 8 4 4 0 000-8z'
+  }
+]
+
+const categoryLabelById = Object.fromEntries(
+  categories.map((category) => [category.id, category.label.toLowerCase()])
+) as Record<CategoryId, string>
+
+const productsSection = ref<HTMLElement | null>(null)
+const categoriesSection = ref<HTMLElement | null>(null)
+
+const products = ref<CatalogProduct[]>([
   // Electronics
   {
     id: 1,
@@ -170,6 +201,7 @@ const products = ref<Product[]>([
     description: 'Latest Apple phone with advanced camera system',
     price: 999,
     rating: 4.8,
+    category: 'electronics',
     thumbnail: getProductImage('iPhone 14 Pro')
   },
   {
@@ -178,6 +210,7 @@ const products = ref<Product[]>([
     description: 'Premium Android device with stunning display',
     price: 899,
     rating: 4.7,
+    category: 'electronics',
     thumbnail: getProductImage('Samsung Galaxy S23')
   },
   {
@@ -186,6 +219,7 @@ const products = ref<Product[]>([
     description: 'Powerful tablet device for work and play',
     price: 599,
     rating: 4.6,
+    category: 'electronics',
     thumbnail: getProductImage('iPad Air')
   },
   {
@@ -194,6 +228,7 @@ const products = ref<Product[]>([
     description: 'Professional laptop for creators',
     price: 1999,
     rating: 4.9,
+    category: 'laptops',
     thumbnail: getProductImage('MacBook Pro')
   },
   {
@@ -202,6 +237,7 @@ const products = ref<Product[]>([
     description: 'Premium wireless noise-canceling headphones',
     price: 349,
     rating: 4.7,
+    category: 'audio',
     thumbnail: getProductImage('Sony WH-1000XM4')
   },
   {
@@ -210,6 +246,7 @@ const products = ref<Product[]>([
     description: 'Ultra-portable laptop with stunning display',
     price: 1299,
     rating: 4.6,
+    category: 'laptops',
     thumbnail: getProductImage('Dell XPS 13')
   },
   {
@@ -218,6 +255,7 @@ const products = ref<Product[]>([
     description: 'Advanced smartwatch with health features',
     price: 399,
     rating: 4.5,
+    category: 'accessories',
     thumbnail: getProductImage('Apple Watch Series 8')
   },
   {
@@ -226,6 +264,7 @@ const products = ref<Product[]>([
     description: 'Portable gaming console with vibrant display',
     price: 349,
     rating: 4.8,
+    category: 'electronics',
     thumbnail: getProductImage('Nintendo Switch OLED')
   },
 
@@ -236,6 +275,7 @@ const products = ref<Product[]>([
     description: 'Gaming laptop with powerful performance',
     price: 1499,
     rating: 4.6,
+    category: 'laptops',
     thumbnail: getProductImage('ASUS ROG Strix G15')
   },
   {
@@ -244,6 +284,7 @@ const products = ref<Product[]>([
     description: '2-in-1 laptop with premium build quality',
     price: 1399,
     rating: 4.5,
+    category: 'laptops',
     thumbnail: getProductImage('HP Spectre x360')
   },
   {
@@ -252,6 +293,7 @@ const products = ref<Product[]>([
     description: 'Business laptop with legendary reliability',
     price: 1599,
     rating: 4.7,
+    category: 'laptops',
     thumbnail: getProductImage('Lenovo ThinkPad X1 Carbon')
   },
   {
@@ -260,16 +302,18 @@ const products = ref<Product[]>([
     description: 'Sleek laptop with all-day battery life',
     price: 1199,
     rating: 4.4,
+    category: 'laptops',
     thumbnail: getProductImage('Microsoft Surface Laptop 4')
   },
 
-  // Clothing & Fashion
+  // Fashion
   {
     id: 13,
     title: 'Nike Air Max 270',
     description: 'Comfortable running shoes with iconic style',
     price: 150,
     rating: 4.6,
+    category: 'fashion',
     thumbnail: getProductImage('Nike Air Max 270')
   },
   {
@@ -278,6 +322,7 @@ const products = ref<Product[]>([
     description: 'Classic straight-fit jeans',
     price: 89,
     rating: 4.5,
+    category: 'fashion',
     thumbnail: getProductImage('Levi\'s 501 Original Jeans')
   },
   {
@@ -286,6 +331,7 @@ const products = ref<Product[]>([
     description: 'High-performance running shoes',
     price: 180,
     rating: 4.7,
+    category: 'fashion',
     thumbnail: getProductImage('Adidas Ultraboost 22')
   },
   {
@@ -294,16 +340,18 @@ const products = ref<Product[]>([
     description: 'Soft and comfortable basic tee',
     price: 12,
     rating: 4.2,
+    category: 'fashion',
     thumbnail: getProductImage('H&M Cotton T-Shirt')
   },
 
-  // Home & Kitchen
+  // Home
   {
     id: 17,
     title: 'KitchenAid Stand Mixer',
     description: 'Professional-grade mixer for baking enthusiasts',
     price: 379,
     rating: 4.8,
+    category: 'home',
     thumbnail: getProductImage('KitchenAid Stand Mixer')
   },
   {
@@ -312,6 +360,7 @@ const products = ref<Product[]>([
     description: 'Powerful cordless vacuum cleaner',
     price: 499,
     rating: 4.6,
+    category: 'home',
     thumbnail: getProductImage('Dyson V8 Absolute')
   },
   {
@@ -320,6 +369,7 @@ const products = ref<Product[]>([
     description: 'Multi-cooker for fast and easy cooking',
     price: 89,
     rating: 4.7,
+    category: 'home',
     thumbnail: getProductImage('Instant Pot Duo 7-in-1')
   },
   {
@@ -328,16 +378,18 @@ const products = ref<Product[]>([
     description: 'Premium espresso maker with milk frother',
     price: 199,
     rating: 4.5,
+    category: 'home',
     thumbnail: getProductImage('Nespresso Coffee Machine')
   },
 
-  // Beauty & Personal Care
+  // Beauty, Home, and Accessories
   {
     id: 21,
     title: 'Dyson Airwrap',
     description: 'Multi-styling tool for hair care',
     price: 599,
     rating: 4.4,
+    category: 'beauty',
     thumbnail: getProductImage('Dyson Airwrap')
   },
   {
@@ -346,6 +398,7 @@ const products = ref<Product[]>([
     description: 'Smart robotic vacuum for automated cleaning',
     price: 299,
     rating: 4.3,
+    category: 'home',
     thumbnail: getProductImage('iRobot Roomba')
   },
   {
@@ -354,6 +407,7 @@ const products = ref<Product[]>([
     description: 'Electric toothbrush for superior cleaning',
     price: 89,
     rating: 4.6,
+    category: 'beauty',
     thumbnail: getProductImage('Philips Sonicare Toothbrush')
   },
   {
@@ -362,49 +416,58 @@ const products = ref<Product[]>([
     description: 'High-capacity portable charger',
     price: 49,
     rating: 4.5,
+    category: 'accessories',
     thumbnail: getProductImage('Anker PowerCore 20000')
   }
 ])
 
 const searchQuery = ref('')
-const activeFilter = ref('all')
+const activeFilter = ref<CategoryId | 'all'>('all')
+
+const averageRating = computed(() => {
+  if (!products.value.length) {
+    return '0.0'
+  }
+
+  const total = products.value.reduce((sum, product) => sum + product.rating, 0)
+  return (total / products.value.length).toFixed(1)
+})
 
 const onSearchUpdate = (val: string) => {
   searchQuery.value = val
 }
+
 const onFilterUpdate = (val: string) => {
-  activeFilter.value = val
+  if (val === 'all' || categories.some((category) => category.id === val)) {
+    activeFilter.value = val as CategoryId | 'all'
+  }
 }
 
-// Computed filtered products
+const scrollToSection = (section: HTMLElement | null) => {
+  section?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
+
+const selectCategory = (categoryId: CategoryId) => {
+  activeFilter.value = categoryId
+  scrollToSection(productsSection.value)
+}
+
+const getCategoryCount = (categoryId: CategoryId) => {
+  return products.value.filter((product) => product.category === categoryId).length
+}
+
 const filteredProducts = computed(() => {
-  return products.value.filter(product => {
-    // Search filter
-    const matchesSearch = !searchQuery.value ||
-      product.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      product.description.toLowerCase().includes(searchQuery.value.toLowerCase())
+  const normalizedQuery = searchQuery.value.trim().toLowerCase()
 
-    // Category filter
-    let matchesCategory = activeFilter.value === 'all'
+  return products.value.filter((product) => {
+    const matchesSearch =
+      !normalizedQuery ||
+      product.title.toLowerCase().includes(normalizedQuery) ||
+      product.description.toLowerCase().includes(normalizedQuery) ||
+      categoryLabelById[product.category].includes(normalizedQuery)
 
-    if (!matchesCategory) {
-      switch (activeFilter.value) {
-        case 'electronics':
-          matchesCategory = [1, 2, 3, 5, 7, 8].includes(product.id)
-          break
-        case 'laptops':
-          matchesCategory = [4, 6, 9, 10, 11, 12].includes(product.id)
-          break
-        case 'clothing':
-          matchesCategory = [13, 14, 15, 16].includes(product.id)
-          break
-        case 'home':
-          matchesCategory = [17, 18, 19, 20].includes(product.id)
-          break
-        default:
-          matchesCategory = true
-      }
-    }
+    const matchesCategory =
+      activeFilter.value === 'all' || product.category === activeFilter.value
 
     return matchesSearch && matchesCategory
   })

@@ -30,46 +30,27 @@
         <button
           @click="setFilter('all')"
           :class="['px-4 py-2 rounded-lg text-sm font-medium transition-colors',
-                   activeFilter === 'all' ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200']"
+                   props.activeFilter === 'all' ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200']"
         >
           All
         </button>
         <button
-          @click="setFilter('electronics')"
+          v-for="category in props.categories"
+          :key="category.id"
+          @click="setFilter(category.id)"
           :class="['px-4 py-2 rounded-lg text-sm font-medium transition-colors',
-                   activeFilter === 'electronics' ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200']"
+                   props.activeFilter === category.id ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200']"
         >
-          Electronics
-        </button>
-        <button
-          @click="setFilter('laptops')"
-          :class="['px-4 py-2 rounded-lg text-sm font-medium transition-colors',
-                   activeFilter === 'laptops' ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200']"
-        >
-          Laptops
-        </button>
-        <button
-          @click="setFilter('clothing')"
-          :class="['px-4 py-2 rounded-lg text-sm font-medium transition-colors',
-                   activeFilter === 'clothing' ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200']"
-        >
-          Clothing
-        </button>
-        <button
-          @click="setFilter('home')"
-          :class="['px-4 py-2 rounded-lg text-sm font-medium transition-colors',
-                   activeFilter === 'home' ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200']"
-        >
-          Home & Kitchen
+          {{ category.label }}
         </button>
       </div>
     </div>
 
     <!-- Active Filters Display -->
-    <div v-if="activeFilter !== 'all'" class="mt-4 flex items-center gap-2">
+    <div v-if="props.activeFilter !== 'all'" class="mt-4 flex items-center gap-2">
       <span class="text-sm text-gray-600">Filtered by:</span>
       <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800 capitalize">
-        {{ activeFilter }}
+        {{ activeFilterLabel }}
         <button @click="setFilter('all')" class="ml-1 inline-flex items-center">
           <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -81,7 +62,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
+
+interface CategoryOption {
+  id: string
+  label: string
+}
+
+const props = defineProps<{
+  categories: CategoryOption[]
+  activeFilter: string
+}>()
 
 const emit = defineEmits<{
   (e: 'update:search', value: string): void
@@ -89,7 +80,10 @@ const emit = defineEmits<{
 }>()
 
 const searchQuery = ref('')
-const activeFilter = ref('all')
+
+const activeFilterLabel = computed(() => {
+  return props.categories.find((category) => category.id === props.activeFilter)?.label ?? 'All'
+})
 
 watch(searchQuery, (val) => {
   emit('update:search', val)
@@ -100,7 +94,6 @@ const clearSearch = () => {
 }
 
 const setFilter = (filter: string) => {
-  activeFilter.value = filter
   emit('update:filter', filter)
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white py-20 relative overflow-hidden">
+    <section id="home" class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white py-20 relative overflow-hidden">
       <!-- Background Pattern -->
       <div class="absolute inset-0 opacity-10">
         <div class="absolute top-10 left-10 w-20 h-20 bg-white rounded-full"></div>
@@ -55,7 +55,7 @@
       </div>
     </section>
 
-    <main ref="productsSection" class="container mx-auto px-4 py-8 scroll-mt-24">
+    <main id="products" ref="productsSection" class="container mx-auto px-4 py-8 scroll-mt-24">
       <h1 class="text-3xl font-bold mb-8">Products</h1>
 
       <FilterBar
@@ -65,10 +65,14 @@
         @update:filter="onFilterUpdate"
       />
 
-      <ProductGrid :products="filteredProducts" />
+      <section id="deals" class="scroll-mt-24">
+        <ProductGrid :products="filteredProducts" />
+      </section>
+
+      <div id="new-arrivals" class="h-0 scroll-mt-24" aria-hidden="true"></div>
 
       <!-- Featured Categories -->
-      <section ref="categoriesSection" class="mt-16 bg-white py-16 scroll-mt-24">
+      <section id="categories" ref="categoriesSection" class="mt-16 bg-white py-16 scroll-mt-24">
         <div class="container mx-auto px-4">
           <h2 class="text-3xl font-bold text-center mb-12">Shop by Category</h2>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

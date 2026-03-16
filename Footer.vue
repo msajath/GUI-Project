@@ -35,11 +35,7 @@
         <div>
           <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
           <ul class="space-y-2">
-            <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Home</a></li>
-            <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Products</a></li>
-            <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Categories</a></li>
-            <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Deals</a></li>
-            <li><a href="#" class="text-gray-300 hover:text-white transition-colors">New Arrivals</a></li>
+            <li><router-link to="/" class="text-gray-300 hover:text-white transition-colors">Home</router-link></li>
           </ul>
         </div>
 

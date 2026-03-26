@@ -101,8 +101,8 @@
 
           <!-- Action Buttons -->
           <div class="space-y-3 pt-4">
-            <button class="btn-primary w-full py-4 text-lg">
-              🛒 Add to Cart
+            <button @click="handleAddToCart(product)" class="btn-primary w-full py-4 text-lg transform transition active:scale-95 flex justify-center items-center gap-2">
+              🛒 {{ isAdded ? 'Added!' : 'Add to Cart' }}
             </button>
             <button 
               @click="toggleSave"
@@ -177,9 +177,20 @@ import { ref, onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import type { Product } from './Product'
 import { getProductImage } from './imageMapping'
+import { useCart } from './useCart'
 
 const route = useRoute()
 const isSaved = ref(false)
+const isAdded = ref(false)
+const { addToCart } = useCart()
+
+const handleAddToCart = (p: Product) => {
+  addToCart(p)
+  isAdded.value = true
+  setTimeout(() => {
+    isAdded.value = false
+  }, 1500)
+}
 
 // All products data
 const products: Product[] = [

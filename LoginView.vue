@@ -1,6 +1,7 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-400 via-pink-500 to-red-500 animate-fade-in">
-    <div class="w-full max-w-md p-8 border rounded-lg shadow-2xl bg-white/90 backdrop-blur-sm transform transition-all duration-500 hover:scale-105">
+  <div class="min-h-screen flex items-center justify-center relative overflow-hidden bg-cover bg-center animate-fade-in" style="background-image: url('/login-bg.png')">
+    <div class="absolute inset-0 bg-black/40 z-0"></div>
+    <div class="w-full max-w-md p-8 border rounded-lg shadow-2xl bg-white/90 backdrop-blur-sm transform transition-all duration-500 hover:scale-105 relative z-10">
       <h1 class="text-2xl font-bold mb-6 text-center flex items-center justify-center text-purple-700">
         <UserIcon class="w-6 h-6 mr-2 text-purple-600 animate-pulse" />
         Login

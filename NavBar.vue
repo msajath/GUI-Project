@@ -1,9 +1,8 @@
 <template>
   <header class="bg-white border-b sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-      <router-link to="/" class="flex items-center gap-2">
-        <img src="/logo.svg" alt="ShopSphere Logo" class="h-10 w-10">
-        <span class="text-xl font-bold">ShopSphere</span>
+      <router-link to="/" class="flex items-center">
+        <img src="/shopsphere-logo.svg" alt="ShopSphere Logo" class="h-12 w-auto">
       </router-link>
 
       <nav class="flex gap-6 items-center">

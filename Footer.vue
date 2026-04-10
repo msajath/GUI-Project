@@ -5,8 +5,7 @@
         <!-- Company Info -->
         <div class="col-span-1 md:col-span-2">
           <div class="flex items-center mb-4">
-            <img src="/logo.svg" alt="ShopSphere Logo" class="h-8 w-8 mr-2">
-            <span class="text-xl font-bold">ShopSphere</span>
+            <img src="/shopsphere-logo.svg" alt="ShopSphere Logo" class="h-12 w-auto">
           </div>
           <p class="text-gray-300 mb-4">
             Your ultimate destination for amazing products at unbeatable prices.

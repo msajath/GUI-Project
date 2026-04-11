@@ -35,6 +35,7 @@
           <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
           <ul class="space-y-2">
             <li><router-link to="/" class="text-gray-300 hover:text-white transition-colors">Home</router-link></li>
+            <li><router-link :to="{ path: '/', hash: '#categories' }" class="text-gray-300 hover:text-white transition-colors">Shop Categories</router-link></li>
           </ul>
         </div>
 

@@ -36,6 +36,7 @@
           <ul class="space-y-2">
             <li><router-link to="/" class="text-gray-300 hover:text-white transition-colors">Home</router-link></li>
             <li><router-link :to="{ path: '/', hash: '#categories' }" class="text-gray-300 hover:text-white transition-colors">Shop Categories</router-link></li>
+            <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Track Your Order</a></li>
           </ul>
         </div>
 

@@ -4,6 +4,7 @@ import ProductDetail from './ProductDetail.vue'
 import LoginView from './LoginView.vue'
 import SignupView from './SignupView.vue'
 import ShippingInfo from './ShippingInfo.vue'
+import CheckoutView from './CheckoutView.vue'
 
 export default createRouter({
   history: createWebHistory(),
@@ -27,5 +28,6 @@ export default createRouter({
     { path: '/login', component: LoginView },
     { path: '/signup', component: SignupView },
     { path: '/shipping', component: ShippingInfo },
+    { path: '/checkout', component: CheckoutView },
   ],
 })

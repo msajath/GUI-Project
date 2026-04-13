@@ -69,9 +69,13 @@
                 <span class="font-semibold text-gray-700">Total:</span>
                 <span class="text-xl font-bold text-indigo-600">${{ cartTotalPrice.toFixed(2) }}</span>
               </div>
-              <button class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold py-2.5 rounded-lg hover:shadow-lg transition-all transform hover:scale-[1.02] active:scale-95">
+              <router-link 
+                to="/checkout"
+                @click="showCart = false"
+                class="block w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold py-2.5 rounded-lg hover:shadow-lg transition-all transform hover:scale-[1.02] active:scale-95 text-center"
+              >
                 Checkout
-              </button>
+              </router-link>
             </div>
           </div>
         </div>

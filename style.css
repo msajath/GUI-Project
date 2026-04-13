@@ -1,2 +1,86 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+html,
+body,
+#app {
+	min-height: 100%;
+}
+
+body {
+	background: linear-gradient(135deg, #eef2ff 0%, #e0ecff 45%, #dbeafe 100%);
+	color: #111827;
+	transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+html.dark body {
+	background: linear-gradient(135deg, #020617 0%, #111827 55%, #0f172a 100%);
+	color: #e5e7eb;
+}
+
+/* Global dark-mode utility overrides for existing Tailwind classes in this app. */
+html.dark .bg-white {
+	background-color: #111827 !important;
+}
+
+html.dark .bg-gray-50 {
+	background-color: #1f2937 !important;
+}
+
+html.dark .bg-gray-100 {
+	background-color: #374151 !important;
+}
+
+html.dark .bg-gray-200 {
+	background-color: #4b5563 !important;
+}
+
+html.dark .border,
+html.dark .border-gray-100,
+html.dark .border-gray-200,
+html.dark .border-gray-300 {
+	border-color: #374151 !important;
+}
+
+html.dark .text-gray-900,
+html.dark .text-gray-800,
+html.dark .text-gray-700 {
+	color: #f3f4f6 !important;
+}
+
+html.dark .text-gray-600,
+html.dark .text-gray-500,
+html.dark .text-gray-400 {
+	color: #9ca3af !important;
+}
+
+html.dark .hover\:bg-gray-50:hover {
+	background-color: #1f2937 !important;
+}
+
+html.dark .hover\:bg-gray-100:hover {
+	background-color: #374151 !important;
+}
+
+html.dark .hover\:bg-gray-200:hover {
+	background-color: #4b5563 !important;
+}
+
+html.dark .bg-white\/90,
+html.dark .bg-white\/95 {
+	background-color: rgba(17, 24, 39, 0.92) !important;
+}
+
+html.dark input,
+html.dark select,
+html.dark textarea {
+	background-color: #111827;
+	color: #f3f4f6;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+	color: #9ca3af;
+}
+

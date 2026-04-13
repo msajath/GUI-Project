@@ -44,7 +44,7 @@
               ⭐ Featured Product
             </div>
             
-            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 text-white mb-4">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               {{ product.title }}
             </h1>
 

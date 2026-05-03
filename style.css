@@ -9,6 +9,10 @@ body,
 }
 
 body {
+	overflow-x: hidden;
+}
+
+body {
 	background: linear-gradient(135deg, #eef2ff 0%, #e0ecff 45%, #dbeafe 100%);
 	color: #111827;
 	transition: background-color 0.25s ease, color 0.25s ease;

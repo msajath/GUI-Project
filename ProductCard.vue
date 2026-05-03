@@ -1,6 +1,6 @@
 <template>
   <div class="border rounded p-4">
-    <img :src="product.thumbnail" :alt="product.title" class="w-full h-48 object-cover mb-4" />
+    <img v-if="product.thumbnail" :src="product.thumbnail" :alt="product.title" class="w-full h-48 object-cover mb-4" />
 
     <h3 class="font-bold mb-2">{{ product.title }}</h3>
 

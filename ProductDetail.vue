@@ -17,22 +17,6 @@
               :alt="product.title"
               class="w-full h-96 object-cover rounded-xl"
             />
-            
-            <!-- Image Info -->
-            <div class="mt-6 grid grid-cols-4 gap-2">
-              <button class="h-16 bg-gray-200 bg-gray-700 rounded-lg hover:ring-2 hover:ring-indigo-600 transition-all transform hover:scale-105">
-                <img :src="product.thumbnail" class="w-full h-full object-cover rounded" />
-              </button>
-              <button class="h-16 bg-gray-200 bg-gray-700 rounded-lg hover:ring-2 hover:ring-indigo-600 transition-all transform hover:scale-105">
-                <img :src="product.thumbnail" class="w-full h-full object-cover rounded" />
-              </button>
-              <button class="h-16 bg-gray-200 bg-gray-700 rounded-lg hover:ring-2 hover:ring-indigo-600 transition-all transform hover:scale-105">
-                <img :src="product.thumbnail" class="w-full h-full object-cover rounded" />
-              </button>
-              <button class="h-16 bg-gray-200 bg-gray-700 rounded-lg hover:ring-2 hover:ring-indigo-600 transition-all transform hover:scale-105">
-                <img :src="product.thumbnail" class="w-full h-full object-cover rounded" />
-              </button>
-            </div>
           </div>
         </div>
 
